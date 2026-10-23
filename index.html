@@ -1,0 +1,1302 @@
+<!DOCTYPE html><html lang="en" class="intro-lock"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>Walima Invitation - Abu Zaid &amp; Namira</title>
+
+<!-- Favicon -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="theme-color" content="#8c253e">
+
+<!-- Link preview (WhatsApp, iMessage, Facebook, etc.) -->
+<!-- TODO once deployed: add og:url and make og:image / twitter:image full URLs (https://<site>/preview.jpg) so WhatsApp shows the image. -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Abu Zaid &amp; Namira — Walima Invitation">
+<meta property="og:description" content="Mr. &amp; Mrs. Riyaz Khan invite you to the Walima of their grandson. Saturday, November 21, 2026 · JK Turf Wedding Hall, Mumbra.">
+<meta property="og:image" content="preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Link preview (Twitter/X) -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Abu Zaid &amp; Namira — Walima Invitation">
+<meta name="twitter:description" content="Mr. &amp; Mrs. Riyaz Khan invite you to the Walima of their grandson. Saturday, November 21, 2026 · JK Turf Wedding Hall, Mumbra.">
+<meta name="twitter:image" content="preview.jpg">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&amp;family=Amiri&amp;family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=Montserrat:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
+<style>
+    :root {
+      --bg-cream: #faf0f2;
+      --burgundy: #8c253e;
+      --burgundy-dark: #6e1c30;
+      --burgundy-light: #b03c58;
+      --accent-gold: #dfa878;
+    }
+
+    body {
+      background-color: #f7ebed;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      color: #3b2329;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .font-script {
+      font-family: 'Alex Brush', cursive;
+    }
+
+    .font-sans-ui {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .invitation-card {
+      background-color: #faf0f2;
+      box-shadow: 0 20px 50px rgba(140, 37, 62, 0.12);
+      max-width: 100%;
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ---------- Intro video gate ---------- */
+    html, body { scrollbar-width: none; -ms-overflow-style: none; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+    html.intro-lock, html.intro-lock body {
+      overflow: hidden;
+      height: 100%;
+      overscroll-behavior: none;
+    }
+    .intro-hero {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+    /* While locked, pin it as a guaranteed full-viewport overlay
+       instead of relying on flexbox to size it correctly. */
+    html.intro-lock .intro-hero {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100svh;
+      z-index: 9999;
+    }
+    .intro-hero.playing { cursor: default; }
+
+    /* Full-bleed, edge-to-edge video — same treatment on mobile and desktop */
+    .intro-hero video.intro-video-main {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    .intro-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.10) 40%, rgba(0,0,0,0.55) 100%);
+      pointer-events: none;
+    }
+    .intro-text {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      color: #fdf3f5;
+      padding: 90px 20px 60px;
+      opacity: 0;
+      transition: opacity 1.6s ease;
+      overflow-y: auto;
+    }
+    .intro-text.show { opacity: 1; }
+    .intro-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: 220px;
+      margin: 0 auto 20px;
+    }
+    .intro-divider.small { width: 170px; margin: 22px auto; }
+    .intro-divider-line {
+      height: 1px;
+      flex: 1;
+      background: rgba(253, 243, 245, 0.4);
+    }
+    .intro-divider-heart {
+      width: 15px;
+      height: 15px;
+      color: #f2b9c5;
+      flex-shrink: 0;
+      filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));
+    }
+    .intro-subline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(0.95rem, 2.1vw, 1.2rem);
+      line-height: 1.7;
+      opacity: 0.92;
+      margin: 2px 0;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+      text-wrap: balance;
+    }
+    .intro-bismillah {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.5rem, 5.5vw, 2.3rem);
+      line-height: 1.9;
+      color: #f3d29b;
+      margin: 0 0 4px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.65);
+    }
+    .intro-host {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(0.9rem, 2.3vw, 1.1rem);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0 0 6px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+    }
+    .intro-msg {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: clamp(1.05rem, 2.6vw, 1.4rem);
+      line-height: 1.55;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.65);
+      text-wrap: balance;
+      max-width: 32em;
+    }
+    .intro-name {
+      font-family: 'Alex Brush', cursive;
+      /* Capped to the text column (viewport minus 40px padding) so the full names stay on one line on narrow phones */
+      font-size: min(clamp(2.6rem, 7.5vw, 5rem), (100vw - 40px) / 8.6);
+      line-height: 1.15;
+      margin: 8px 0;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.65);
+    }
+    .intro-amp {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 3vw, 1.85rem);
+      opacity: 0.85;
+      margin: 6px 0;
+    }
+    /* Short screens (iPhone SE, older Androids, small laptop windows): tighten the intro so it fits without scrolling */
+    @media (max-height: 700px) {
+      .intro-text { padding-top: 72px; }
+      .intro-bismillah { line-height: 1.6; }
+      .intro-divider { margin-bottom: 10px; }
+      .intro-divider.small { margin: 12px auto; }
+      .intro-name { font-size: min(clamp(2.6rem, 7.5vw, 5rem), (100vw - 40px) / 8.6, 9vh); margin: 2px 0; }
+      .intro-amp { margin: 0; }
+    }
+    /* Soft blend so the hero doesn't cut hard into the page below it */
+    .intro-fade {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      height: 90px;
+      background: linear-gradient(180deg, rgba(247,235,237,0) 0%, #f7ebed 100%);
+      pointer-events: none;
+      z-index: 4;
+    }
+    .scroll-hint {
+      position: absolute;
+      right: 20px;
+      bottom: 28px;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: #fdf3f5;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+      pointer-events: none;
+    }
+    .scroll-hint.show {
+      opacity: 0.85;
+      animation: scrollBounce 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-hint.show { animation: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .intro-text { transition: none; }
+    }
+
+    .scratch-card-box {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1 / 1.06;
+      margin: 0 auto;
+      background: transparent;
+      overflow: visible;
+      animation: heartPulse 2.4s ease-in-out infinite;
+      transform-origin: center;
+    }
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .scratch-card-box { animation: none; }
+    }
+    @media (min-width: 480px) {
+      .scratch-card-box { max-width: 360px; }
+    }
+    @media (min-width: 768px) {
+      .scratch-card-box { max-width: 400px; }
+    }
+
+    .revealed-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      padding: 1.5rem 1.25rem;
+      text-align: center;
+      z-index: 1;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease-out;
+    }
+    .revealed-content.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #scratchCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      cursor: pointer;
+      touch-action: none;
+    }
+
+    /* Falling Petals Styles (Dual CSS fallback layer) */
+    #petals-container {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 100000;
+      overflow: hidden;
+    }
+
+    .css-petal {
+      position: absolute;
+      top: -50px;
+      will-change: transform, opacity;
+      pointer-events: none;
+      filter: drop-shadow(0 4px 6px rgba(120, 20, 45, 0.15));
+      animation-name: petalFallAnim, petalSwayAnim;
+      animation-timing-function: linear, ease-in-out;
+      animation-iteration-count: infinite, infinite;
+    }
+
+    .css-petal-inner {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      animation: petalSpinAnim linear infinite;
+    }
+
+    @keyframes petalFallAnim {
+      0% {
+        top: -60px;
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.65;
+      }
+      85% {
+        opacity: 0.6;
+      }
+      100% {
+        top: 108vh;
+        opacity: 0.05;
+      }
+    }
+
+    @keyframes petalSwayAnim {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(var(--drift-x, 35px));
+      }
+    }
+
+    @keyframes petalSpinAnim {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      }
+      100% {
+        transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg);
+      }
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-center items-center">
+<!-- ================= INTRO VIDEO GATE ================= -->
+<section class="intro-hero" id="introHero">
+  <video class="intro-video-main" id="introVideo" src="royal-prestige-ezremove.mp4" playsinline="" webkit-playsinline="" preload="auto"></video>
+  <div class="intro-text" id="introText">
+    <p class="intro-bismillah" lang="ar" dir="rtl">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p>
+    <div class="intro-divider">
+      <span class="intro-divider-line"></span>
+      <svg class="intro-divider-heart" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+      <span class="intro-divider-line"></span>
+    </div>
+    <p class="intro-host">Mr. &amp; Mrs. Riyaz Khan</p>
+    <p class="intro-msg">With joyful hearts and the blessings of the Almighty, we warmly invite you to the Walima ceremony of our grandson</p>
+    <div class="intro-divider small">
+      <span class="intro-divider-line"></span>
+      <svg class="intro-divider-heart" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+      <span class="intro-divider-line"></span>
+    </div>
+    <div class="intro-name font-script">Dr. Abu Zaid Khan</div>
+    <p class="intro-subline">Son of Dr. Abu Rafat Khan</p>
+    <div class="intro-amp">with</div>
+    <div class="intro-name font-script">Dr. Namira Kulsum</div>
+    <p class="intro-subline">Daughter of Mohammed Arshad Siddiqui</p>
+  </div>
+  <div class="intro-fade"></div>
+  <div class="scroll-hint" id="scrollHint">
+    <span>Scroll</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"></path></svg>
+  </div>
+</section>
+<!-- ================= WELCOME MESSAGE (bridges video into the page) ================= -->
+<section class="w-full text-center py-16 sm:py-20 px-6" style="background: linear-gradient(180deg, #232a3d 0%, #3a2f3f 25%, #6b4550 50%, #b98c98 75%, #f7ebed 100%);">
+<div class="flex items-center justify-center gap-3 w-56 sm:w-64 mx-auto mb-8">
+<div class="h-[1px] bg-white/25 flex-1"></div>
+<svg class="w-4 h-4 text-[#f2b9c5]" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<div class="h-[1px] bg-white/25 flex-1"></div>
+</div>
+<p class="font-serif italic text-[#fdf3f5] text-lg sm:text-xl leading-relaxed max-w-xl mx-auto text-balance" style="text-shadow: 0 2px 10px rgba(0,0,0,0.45);">
+        “May Allah (SWT) bless this union with love, guidance, and a prosperous life filled with Imaan and peace.”
+      </p>
+<p class="font-sans-ui font-semibold uppercase tracking-[0.25em] text-sm text-[#f3d29b] mt-3" style="text-shadow: 0 2px 10px rgba(0,0,0,0.45);">
+        Aameen
+      </p>
+<div class="flex items-center justify-center gap-3 w-56 sm:w-64 mx-auto mt-8">
+<div class="h-[1px] bg-white/25 flex-1"></div>
+<svg class="w-4 h-4 text-[#f2b9c5]" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<div class="h-[1px] bg-white/25 flex-1"></div>
+</div>
+</section>
+<!-- Dual falling petals system: 1) Hardware Canvas 2) CSS DOM Fallback -->
+<canvas class="fixed inset-0 w-full h-full pointer-events-none z-[100000]" id="petals-canvas"></canvas>
+<div aria-hidden="true" id="petals-container"></div>
+<!-- Petal SVGs Template Library -->
+<svg class="hidden" height="0" width="0">
+<defs>
+<!-- Petal Gradient 1: Deep Rose Burgundy with Velvet Shading -->
+<radialGradient cx="40%" cy="35%" id="petalGrad1" r="65%">
+<stop offset="0%" stop-color="#ffb3c1" stop-opacity="0.85"></stop>
+<stop offset="40%" stop-color="#df3d68" stop-opacity="0.8"></stop>
+<stop offset="85%" stop-color="#9a1d3a" stop-opacity="0.82"></stop>
+<stop offset="100%" stop-color="#640e22" stop-opacity="0.85"></stop>
+</radialGradient>
+<!-- Petal Gradient 2: Rich Crimson Rose Quartz -->
+<radialGradient cx="30%" cy="25%" id="petalGrad2" r="70%">
+<stop offset="0%" stop-color="#ffd5de" stop-opacity="0.85"></stop>
+<stop offset="45%" stop-color="#cf3d62" stop-opacity="0.8"></stop>
+<stop offset="90%" stop-color="#8c1f38" stop-opacity="0.82"></stop>
+</radialGradient>
+<!-- Petal Gradient 3: Warm Velvet Carmine & Peach Gold -->
+<radialGradient cx="45%" cy="30%" id="petalGrad3" r="65%">
+<stop offset="0%" stop-color="#fca5b7" stop-opacity="0.85"></stop>
+<stop offset="50%" stop-color="#b82a4d" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#73152b" stop-opacity="0.82"></stop>
+</radialGradient>
+<!-- Petal Shape Variant A (Natural curved teardrop petal) -->
+<path d="M22 2 C10 10, 0 25, 4 38 C8 49, 26 50, 36 43 C46 35, 45 18, 36 7 C31 1, 26 0, 22 2 Z" id="petalShapeA"></path>
+<!-- Petal Shape Variant B (Folded edge delicate rose petal) -->
+<path d="M24 2 C12 8, 2 22, 6 36 C10 49, 28 51, 40 40 C49 29, 46 12, 33 4 C29 1, 26 0, 24 2 Z" id="petalShapeB"></path>
+<!-- Petal Shape Variant C (Slender fluttering blossom petal) -->
+<path d="M20 2 C9 11, 3 26, 10 40 C17 50, 32 49, 39 37 C45 25, 40 10, 30 2 C26 -1, 23 0, 20 2 Z" id="petalShapeC"></path>
+</defs>
+</svg>
+<main class="invitation-card w-full mx-auto overflow-hidden relative z-10 shadow-2xl sm:my-6 rounded-none sm:rounded-3xl">
+<!-- Sound Toggle Button -->
+<div class="fixed right-4 sm:right-6 z-[100002]" style="top: calc(env(safe-area-inset-top, 0px) + 1.75rem);">
+<button aria-label="Toggle music" aria-pressed="false" class="w-10 h-10 rounded-xl bg-[#b0435e] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.35)] border border-white/40 hover:scale-105 active:scale-95 transition-transform cursor-pointer" id="audioToggle">
+<svg class="w-5 h-5" fill="none" id="musicIcon" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+<line x1="23" y1="9" x2="17" y2="15"></line>
+<line x1="17" y1="9" x2="23" y2="15"></line>
+</svg>
+</button>
+</div>
+<!-- Notification Toast -->
+<div class="fixed top-6 left-1/2 -translate-x-1/2 bg-[#8c253e] text-white px-4 py-1.5 rounded-full text-xs font-sans-ui tracking-wide shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 z-50" id="audioToast">
+      Romantic Melody Playing
+    </div>
+<!-- Wedding Song (starts at 11s, loops back to 11s instead of the very start) -->
+<audio id="bgMusic" src="wedding-music.mp3" preload="auto"></audio>
+<!-- ================= SECTION 1: SCRATCH TO REVEAL ================= -->
+<section class="pt-10 px-6 flex flex-col items-center text-center pb-4">
+<h1 class="font-script text-5xl sm:text-6xl text-[#8c253e] tracking-wide mt-2" id="scratchHeading">
+        Scratch to Reveal
+      </h1>
+<!-- Heart Divider -->
+<div class="flex items-center justify-center gap-3 w-48 my-3">
+<div class="h-[1px] bg-[#d9a8b3] flex-1"></div>
+<svg class="w-3.5 h-3.5 text-[#b03c58]" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<div class="h-[1px] bg-[#d9a8b3] flex-1"></div>
+</div>
+<!-- Scratch Box Card -->
+<div class="scratch-card-box my-5" id="scratchCardBox">
+<!-- Secret Underneath (Fully Covered Until User Scratches) -->
+<div class="revealed-content select-none">
+<div class="text-[#8c253e] text-[20px] uppercase tracking-[0.22em] font-sans-ui font-semibold mb-1">
+            Walima
+          </div>
+<div class="h-[1px] w-16 bg-[#dfa878]/70 my-2"></div>
+<div class="text-[13px] font-semibold tracking-[0.3em] text-[#8c253e] font-sans-ui mb-0.5">
+            SATURDAY
+          </div>
+<div class="text-[23px] font-bold tracking-wider text-[#351e24] font-sans-ui">
+            NOVEMBER 21, 2026
+          </div>
+<!-- Filled from EVENT_TIME in the script -->
+<div class="text-[23px] font-bold tracking-wider text-[#351e24] font-sans-ui" id="eventTimeText">
+            TIME TBC
+</div>
+<div class="text-[11px] text-[#8c253e] mt-4 font-sans-ui bg-[#fdedf1] px-3.5 py-1.5 rounded-full border border-[#f5c7d2]">
+            ✨ Celebrate with us ✨
+          </div>
+</div>
+<!-- Scratch Canvas (Completely covers secret card with solid opaque layer + glitter heart) -->
+<canvas height="330" id="scratchCanvas" style="width: 100%; height: 100%; display: block; position: absolute; top: 0px; left: 0px;" width="310"></canvas>
+</div>
+<!-- Instruction Hint -->
+<p class="text-xs text-[#8c253e] font-sans-ui tracking-wide mb-6 flex items-center gap-1.5" id="scratchHint">
+<span class="">✨</span> Touch or drag heart to scratch and reveal the date <span class="">✨</span>
+</p>
+<!-- Save The Date Action Button -->
+<button class="w-full max-w-xs sm:w-auto bg-[#8c253e] hover:bg-[#721d32] active:scale-95 transition-all duration-200 text-white font-sans-ui text-xs tracking-[0.2em] font-semibold py-3.5 px-8 rounded-full shadow-[0_8px_22px_rgba(140,37,62,0.28)] flex items-center justify-center gap-2.5 mx-auto cursor-pointer" id="saveDateBtn">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+<line x1="12" x2="12" y1="14" y2="18"></line>
+<line x1="10" x2="14" y1="16" y2="16"></line>
+</svg>
+        SAVE THE DATE
+      </button>
+<!-- Heart divider bottom -->
+<div class="flex items-center justify-center gap-3 w-48 mt-9">
+<div class="h-[1px] bg-[#d9a8b3] flex-1"></div>
+<svg class="w-3.5 h-3.5 text-[#b03c58]" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<div class="h-[1px] bg-[#d9a8b3] flex-1"></div>
+</div>
+</section>
+<!-- ================= SECTION 2: PHOTO & COUNTDOWN ================= -->
+<section class="pb-10 px-6 flex flex-col items-center">
+<!-- Photo Carousel -->
+<!-- PLACEHOLDER: add photos of Abu Zaid & Namira here by restoring the
+     <img class="carousel-slide"> slides and #carouselDots buttons from the original template. -->
+<div class="relative w-full max-w-sm mx-auto rounded-2xl overflow-hidden shadow-lg border border-[#edd5db] aspect-[2/1]" id="photoCarousel">
+<div class="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-[#f3e1e5] text-[#8c253e]">
+<svg class="w-7 h-7 opacity-60" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+<circle cx="12" cy="13" r="4"></circle>
+</svg>
+<span class="font-script text-3xl">Photos coming soon</span>
+</div>
+</div>
+<!-- SINGLE Heading for Countdown (No Duplication) -->
+<div class="text-center mt-9 mb-3">
+<h2 class="font-script text-4xl sm:text-5xl text-[#8c253e]">
+          Counting Down to Forever
+        </h2>
+<div class="flex items-center justify-center gap-3 w-40 mx-auto my-3">
+<div class="h-[1px] bg-[#d9a8b3] flex-1"></div>
+<svg class="w-3 h-3 text-[#b03c58]" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<div class="h-[1px] bg-[#d9a8b3] flex-1"></div>
+</div>
+</div>
+<!-- Countdown Blocks -->
+<div class="grid grid-cols-4 gap-2 sm:gap-3 md:gap-3.5 w-full max-w-sm mx-auto mt-2 px-1">
+<!-- Days -->
+<div class="flex flex-col items-center">
+<div class="w-full aspect-square bg-[#eed7dc] border border-[#e5c5cc] rounded-xl flex items-center justify-center shadow-sm">
+<span class="text-2xl sm:text-3xl font-normal text-[#2e181e] font-serif" id="daysCount">103</span>
+</div>
+<span class="text-[10px] font-sans-ui tracking-[0.18em] font-medium text-[#7c283c] mt-2">DAYS</span>
+</div>
+<!-- Hours -->
+<div class="flex flex-col items-center">
+<div class="w-full aspect-square bg-[#eed7dc] border border-[#e5c5cc] rounded-xl flex items-center justify-center shadow-sm">
+<span class="text-2xl sm:text-3xl font-normal text-[#2e181e] font-serif" id="hoursCount">04</span>
+</div>
+<span class="text-[10px] font-sans-ui tracking-[0.18em] font-medium text-[#7c283c] mt-2">HOURS</span>
+</div>
+<!-- Minutes -->
+<div class="flex flex-col items-center">
+<div class="w-full aspect-square bg-[#eed7dc] border border-[#e5c5cc] rounded-xl flex items-center justify-center shadow-sm">
+<span class="text-2xl sm:text-3xl font-normal text-[#2e181e] font-serif" id="minutesCount">11</span>
+</div>
+<span class="text-[10px] font-sans-ui tracking-[0.18em] font-medium text-[#7c283c] mt-2">MINUTES</span>
+</div>
+<!-- Seconds -->
+<div class="flex flex-col items-center">
+<div class="w-full aspect-square bg-[#eed7dc] border border-[#e5c5cc] rounded-xl flex items-center justify-center shadow-sm">
+<span class="text-2xl sm:text-3xl font-normal text-[#2e181e] font-serif" id="secondsCount">11</span>
+</div>
+<span class="text-[10px] font-sans-ui tracking-[0.18em] font-medium text-[#7c283c] mt-2">SECONDS</span>
+</div>
+</div>
+</section>
+<!-- ================= SECTION 3: VENUE ================= -->
+<section class="py-8 px-6 flex flex-col items-center text-center">
+<!-- Venue Pin Icon -->
+<div class="w-8 h-8 text-[#8c253e] mb-1">
+<svg class="w-full h-full" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+</svg>
+</div>
+<!-- Script Heading -->
+<h2 class="font-script text-5xl text-[#8c253e]">
+        Venue
+      </h2>
+<!-- Heart Divider -->
+<div class="flex items-center justify-center gap-3 w-40 my-3">
+<div class="h-[1px] bg-[#d9a8b3] flex-1"></div>
+<svg class="w-3 h-3 text-[#b03c58]" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+<div class="h-[1px] bg-[#d9a8b3] flex-1"></div>
+</div>
+<!-- Venue Name & Address -->
+<h3 class="text-2xl font-semibold text-[#291318] tracking-wide mt-2">
+        JK Turf Wedding Hall
+      </h3>
+<p class="text-[#5a363f] text-sm leading-relaxed max-w-xs mt-1.5 font-normal">
+        Y-Junction, Kausa, Mumbra,<br>Thane - 400612
+      </p>
+<a class="inline-flex items-center gap-1.5 text-[#8c253e] text-sm font-sans-ui tracking-wide mt-2 underline-offset-4 hover:underline" href="tel:+919224322488">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+</svg>
+        Mob: 9224322488
+      </a>
+<!-- Garden Pavilion & Arch Line Art Graphic -->
+<div class="w-full max-w-[260px] sm:max-w-[320px] mx-auto my-6 px-2">
+<svg class="w-full h-auto text-[#dfabb5]" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" viewBox="0 0 300 130">
+<!-- Baseline / Courtyard -->
+<line stroke-width="1.8" x1="20" x2="280" y1="120" y2="120"></line>
+<line stroke-width="1" x1="15" x2="285" y1="123" y2="123"></line>
+<!-- Central Garden Pavilion Arch (Baug Gate & Dome) -->
+<path d="M110 120 V78 C110 52, 130 38, 150 20 C170 38, 190 52, 190 78 V120"></path>
+<path d="M122 120 V84 C122 66, 136 56, 150 44 C164 56, 178 66, 178 84 V120"></path>
+<!-- Central Finial -->
+<circle cx="150" cy="18" fill="currentColor" r="2.5"></circle>
+<line x1="150" x2="150" y1="15.5" y2="9"></line>
+<!-- Floral Arch Crest & Chandeliers inside Pavilion -->
+<path d="M135 84 Q150 75 165 84"></path>
+<circle cx="150" cy="80" fill="currentColor" r="1.5"></circle>
+<line x1="150" x2="150" y1="56" y2="76"></line>
+<!-- Left Floral Pavilion Pillar & Lattice -->
+<path d="M60 120 V88 H110"></path>
+<path d="M60 88 C60 70, 85 60, 85 52 C85 60, 110 70, 110 88"></path>
+<circle cx="85" cy="50" fill="currentColor" r="2"></circle>
+<line x1="85" x2="85" y1="48" y2="43"></line>
+<path d="M72 120 V98 C72 92, 98 92, 98 98 V120"></path>
+<!-- Right Floral Pavilion Pillar & Lattice -->
+<path d="M190 88 H240 V120"></path>
+<path d="M190 88 C190 70, 215 60, 215 52 C215 60, 240 70, 240 88"></path>
+<circle cx="215" cy="50" fill="currentColor" r="2"></circle>
+<line x1="215" x2="215" y1="48" y2="43"></line>
+<path d="M202 120 V98 C202 92, 228 92, 228 98 V120"></path>
+<!-- Ornamental Garden Cypress Trees / Minarets -->
+<path d="M35 120 V82 C35 74, 42 60, 42 56 C42 60, 49 74, 49 82 V120"></path>
+<line x1="42" x2="42" y1="56" y2="50"></line>
+<circle cx="42" cy="49" fill="currentColor" r="1.5"></circle>
+<path d="M251 120 V82 C251 74, 258 60, 258 56 C258 60, 265 74, 265 82 V120"></path>
+<line x1="258" x2="258" y1="56" y2="50"></line>
+<circle cx="258" cy="49" fill="currentColor" r="1.5"></circle>
+<!-- Garden floral sprigs -->
+<path d="M28 120 Q32 110 30 102"></path>
+<path d="M272 120 Q268 110 270 102"></path>
+</svg>
+</div>
+<!-- Google Maps Button (TODO: replace the address search with the exact pin link from the family) -->
+<a class="w-full max-w-xs sm:w-auto bg-[#8c253e] hover:bg-[#721d32] active:scale-95 transition-all text-white font-serif text-sm tracking-wide py-3 px-8 rounded-lg shadow-md inline-block font-medium text-center mx-auto" href="https://www.google.com/maps/search/?api=1&amp;query=JK+Turf+Wedding+Hall%2C+Y-Junction%2C+Kausa%2C+Mumbra%2C+Thane+400612" rel="noopener noreferrer" target="_blank">
+        View on Google Maps
+      </a>
+</section>
+<!-- ================= SECTION 4: CELEBRATE WITH YOU ================= -->
+<section class="py-14 px-6 flex flex-col items-center text-center relative">
+<!-- Decorative Top Flourish Line with Dots -->
+<div class="w-full max-w-xs mb-8">
+<svg class="w-full h-auto text-[#d8a2ad]" viewBox="0 0 320 28">
+<path d="M10 14 Q85 4 160 14 T310 14" fill="none" stroke="currentColor" stroke-width="1.2"></path>
+<circle cx="50" cy="18" fill="currentColor" r="1.5"></circle>
+<circle cx="120" cy="9" fill="currentColor" r="1.5"></circle>
+<circle cx="200" cy="19" fill="currentColor" r="1.5"></circle>
+<circle cx="270" cy="10" fill="currentColor" r="1.5"></circle>
+</svg>
+</div>
+<h2 class="font-script text-4xl sm:text-5xl text-[#8c253e] leading-snug px-4">
+        We can't wait to celebrate<br>with you!
+      </h2>
+<!-- Decorative Bottom Flourish Line with Dots -->
+<div class="w-full max-w-xs mt-8">
+<svg class="w-full h-auto text-[#d8a2ad]" viewBox="0 0 320 28">
+<path d="M10 14 Q85 24 160 14 T310 14" fill="none" stroke="currentColor" stroke-width="1.2"></path>
+<circle cx="45" cy="10" fill="currentColor" r="1.5"></circle>
+<circle cx="115" cy="19" fill="currentColor" r="1.5"></circle>
+<circle cx="205" cy="9" fill="currentColor" r="1.5"></circle>
+<circle cx="275" cy="18" fill="currentColor" r="1.5"></circle>
+</svg>
+</div>
+</section>
+<!-- Footer Signature -->
+<footer class="py-8 border-t border-[#f0d6dc] text-center bg-[#fdf7f8]/60">
+<div class="font-script text-2xl text-[#8c253e]">
+        With Best Compliments
+      </div>
+<p class="text-[11px] font-sans-ui tracking-wider text-[#9b6672] mt-1 uppercase">
+        Mr. &amp; Mrs. Riyaz Khan <br> &amp; <br> Family
+      </p>
+</footer>
+</main>
+<script>
+    // ================= EVENT DETAILS =================
+    // One place for the date and time used by the scratch card, countdown and calendar file.
+    // The time isn't on the printed card yet: set EVENT_TIME to 'HH:MM' (24-hour, IST) once confirmed, e.g. '19:30'.
+    const EVENT_DATE = '2026-11-21';
+    const EVENT_TIME = null;
+    const EVENT_DURATION_HOURS = 3; // calendar entry length once a time is set
+
+    if (EVENT_TIME) {
+      const [h, m] = EVENT_TIME.split(':').map(Number);
+      document.getElementById('eventTimeText').textContent =
+        (h % 12 || 12) + ':' + String(m).padStart(2, '0') + (h < 12 ? ' AM' : ' PM') + ' Onwards';
+    }
+
+    // ================= PHOTO CAROUSEL =================
+    (function initCarousel() {
+      var root = document.getElementById('photoCarousel');
+      if (!root) return;
+      var slides = root.querySelectorAll('.carousel-slide');
+      var dots = root.querySelectorAll('.carousel-dot');
+      if (slides.length < 2) return;
+      var idx = 0;
+      var AUTO_MS = 4000;
+      var timer = null;
+
+      function show(i) {
+        idx = (i + slides.length) % slides.length;
+        slides.forEach(function (s, si) {
+          s.style.opacity = si === idx ? '1' : '0';
+        });
+        dots.forEach(function (d, di) {
+          if (di === idx) {
+            d.classList.remove('w-2', 'bg-white/80');
+            d.classList.add('w-5', 'bg-[#8c253e]');
+          } else {
+            d.classList.remove('w-5', 'bg-[#8c253e]');
+            d.classList.add('w-2', 'bg-white/80');
+          }
+        });
+      }
+
+      function restart() {
+        clearInterval(timer);
+        timer = setInterval(function () { show(idx + 1); }, AUTO_MS);
+      }
+
+      dots.forEach(function (d, di) {
+        d.addEventListener('click', function () {
+          show(di);
+          restart();
+        });
+      });
+
+      show(0);
+      restart();
+    })();
+
+    // ================= INTRO VIDEO GATE =================
+    (function initIntroGate() {
+      var hero = document.getElementById('introHero');
+      var video = document.getElementById('introVideo');
+      var text = document.getElementById('introText');
+      var root = document.documentElement;
+      var started = false;
+      var textShown = false;
+      var unlocked = false;
+      var TEXT_LEAD_SECONDS = 3; // show closing text this many seconds before the end
+
+      function unlockScroll() {
+        if (unlocked) return;
+        unlocked = true;
+        // Reset scroll position first so removing the lock doesn't leave a
+        // visible gap/jump at the top as the fixed overlay returns to normal flow.
+        window.scrollTo(0, 0);
+        root.classList.remove('intro-lock');
+        window.scrollTo(0, 0);
+      }
+
+      function showText() {
+        if (textShown) return;
+        textShown = true;
+        text.classList.add('show');
+        var hint = document.getElementById('scrollHint');
+        if (hint) hint.classList.add('show');
+      }
+
+      function startVideo() {
+        if (started) return;
+        started = true;
+        hero.classList.add('playing');
+
+        // Unmute now — we're inside a real tap/click gesture, so browsers
+        // will allow audio to start playing right along with the video.
+        video.muted = false;
+        video.volume = 1;
+
+        var p = video.play();
+        if (p && p.catch) {
+          p.catch(function () {
+            // Some browsers still block unmuted autoplay even on a tap.
+            // Fall back to a muted play so the visitor isn't stuck on a black screen.
+            video.muted = true;
+            var p2 = video.play();
+            if (p2 && p2.catch) {
+              p2.catch(function () {
+                showText();
+                unlockScroll();
+              });
+            }
+          });
+        }
+
+        // Start the wedding song right along with the video, since this
+        // tap counts as the user gesture browsers require for audio playback.
+        if (typeof playMelody === 'function') playMelody();
+
+        // Backup only: if 'ended' never fires for some reason, don't trap the visitor.
+        var fallbackMs = ((video.duration || 15) + 6) * 1000;
+        setTimeout(function () {
+          showText();
+          unlockScroll();
+        }, fallbackMs);
+      }
+
+      hero.addEventListener('click', startVideo);
+      hero.addEventListener('touchend', function (e) {
+        e.preventDefault();
+        startVideo();
+      }, { passive: false });
+
+      video.addEventListener('timeupdate', function () {
+        if (!textShown && video.duration && video.currentTime >= video.duration - TEXT_LEAD_SECONDS) {
+          showText();
+        }
+      });
+
+      video.addEventListener('ended', function () {
+        showText();
+        setTimeout(unlockScroll, 900);
+      });
+    })();
+
+    // ================= 0. SUBTLE, GENTLE FALLING ROSE PETALS =================
+    // Reduced petal count (~9 active canvas + 3 subtle CSS fallback) with soft opacity and gentle drift
+    (function initPetalsEngine() {
+      // 1. Setup Canvas Animation
+      const pCanvas = document.getElementById('petals-canvas');
+      const pCtx = pCanvas.getContext('2d');
+      let pWidth = (pCanvas.width = window.innerWidth);
+      let pHeight = (pCanvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        pWidth = pCanvas.width = window.innerWidth;
+        pHeight = pCanvas.height = window.innerHeight;
+      });
+
+      const petalColors = [
+        { main: '#cf3d62', dark: '#911e38', light: '#ffa3b5' },
+        { main: '#ba2a4c', dark: '#75142a', light: '#f996ab' },
+        { main: '#e3587b', dark: '#9a2442', light: '#ffd1dc' },
+        { main: '#df4d70', dark: '#881b34', light: '#ffb8c7' }
+      ];
+
+      // Drastically reduced count: 8-9 petals on screen for a subtle, elegant atmosphere
+      const canvasPetalCount = 8;
+      const canvasPetals = [];
+
+      for (let i = 0; i < canvasPetalCount; i++) {
+        canvasPetals.push({
+          x: Math.random() * pWidth,
+          y: Math.random() * (pHeight + 100) - 50,
+          size: 14 + Math.random() * 12,
+          speedY: 0.65 + Math.random() * 0.9,
+          swaySpeed: 0.01 + Math.random() * 0.018,
+          swayAmplitude: 20 + Math.random() * 30,
+          angle: Math.random() * Math.PI * 2,
+          rotationSpeed: 0.008 + Math.random() * 0.018,
+          flip: Math.random() * Math.PI,
+          flipSpeed: 0.012 + Math.random() * 0.02,
+          opacity: 0.48 + Math.random() * 0.22,
+          color: petalColors[Math.floor(Math.random() * petalColors.length)],
+          swayOffset: Math.random() * Math.PI * 2
+        });
+      }
+
+      function drawRosePetal(ctx, p) {
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.angle);
+        ctx.scale(Math.cos(p.flip), 1);
+        ctx.globalAlpha = p.opacity;
+
+        const s = p.size;
+
+        // Subtle soft shadow
+        ctx.shadowColor = 'rgba(120, 20, 45, 0.15)';
+        ctx.shadowBlur = 4;
+        ctx.shadowOffsetY = 2;
+
+        // Petal shape
+        ctx.beginPath();
+        ctx.moveTo(0, -s * 0.75);
+        ctx.bezierCurveTo(s * 0.65, -s * 0.7, s * 0.75, s * 0.25, 0, s * 0.85);
+        ctx.bezierCurveTo(-s * 0.75, s * 0.25, -s * 0.65, -s * 0.7, 0, -s * 0.75);
+        ctx.closePath();
+
+        // Shaded radial fill
+        const grad = ctx.createRadialGradient(-s * 0.15, -s * 0.25, s * 0.1, 0, 0, s * 0.85);
+        grad.addColorStop(0, p.color.light);
+        grad.addColorStop(0.5, p.color.main);
+        grad.addColorStop(1, p.color.dark);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        // Delicate inner vein curve
+        ctx.beginPath();
+        ctx.moveTo(0, -s * 0.55);
+        ctx.quadraticCurveTo(s * 0.08, 0, 0, s * 0.7);
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      let tick = 0;
+      function renderCanvasPetals() {
+        pCtx.clearRect(0, 0, pWidth, pHeight);
+        tick++;
+
+        for (let i = 0; i < canvasPetals.length; i++) {
+          const p = canvasPetals[i];
+          p.y += p.speedY;
+          p.x += Math.sin(tick * p.swaySpeed + p.swayOffset) * 0.8;
+          p.angle += p.rotationSpeed;
+          p.flip += p.flipSpeed;
+
+          // Wrap around top smoothly
+          if (p.y > pHeight + 40) {
+            p.y = -40;
+            p.x = Math.random() * pWidth;
+          }
+          if (p.x < -50) p.x = pWidth + 40;
+          if (p.x > pWidth + 50) p.x = -40;
+
+          drawRosePetal(pCtx, p);
+        }
+        requestAnimationFrame(renderCanvasPetals);
+      }
+      requestAnimationFrame(renderCanvasPetals);
+
+      // 2. Minimal CSS Fallback Petals (only 3 background elements)
+      const container = document.getElementById('petals-container');
+      const shapes = ['#petalShapeA', '#petalShapeB', '#petalShapeC'];
+      const gradients = ['url(#petalGrad1)', 'url(#petalGrad2)', 'url(#petalGrad3)'];
+      const domPetalCount = 3;
+
+      for (let i = 0; i < domPetalCount; i++) {
+        const petalEl = document.createElement('div');
+        petalEl.className = 'css-petal';
+
+        const left = 15 + Math.random() * 70;
+        petalEl.style.left = left + 'vw';
+
+        const fallDuration = 10 + Math.random() * 5;
+        const swayDuration = 3.5 + Math.random() * 3;
+        const spinDuration = 4 + Math.random() * 4;
+        const delay = -Math.random() * 12;
+
+        const drift = (Math.random() * 50 - 25) + 'px';
+        petalEl.style.setProperty('--drift-x', drift);
+
+        petalEl.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
+        petalEl.style.animationDelay = `${delay}s, ${delay}s`;
+
+        const baseSize = 18 + Math.random() * 8;
+        const shapeId = shapes[i % shapes.length];
+        const gradId = gradients[i % gradients.length];
+
+        petalEl.innerHTML = `
+          <div class="css-petal-inner" style="animation-duration: ${spinDuration}s; animation-delay: ${delay * 0.7}s;">
+            <svg width="${baseSize}" height="${baseSize * 1.15}" viewBox="0 0 50 55" style="opacity: 0.65;">
+              <use href="${shapeId}" fill="${gradId}" />
+            </svg>
+          </div>
+        `;
+        container.appendChild(petalEl);
+      }
+    })();
+
+    // ================= 1. SCRATCH CANVAS REVEAL =================
+    const canvas = document.getElementById('scratchCanvas');
+    const ctx = canvas.getContext('2d');
+    const hint = document.getElementById('scratchHint');
+    let isDrawing = false;
+    let hasCelebrated = false;
+
+    function renderScratchSurface() {
+      const w = canvas.width;
+      const h = canvas.height;
+
+      // Transparent canvas — nothing painted outside the heart itself,
+      // so only the heart shape is visible (no square card behind it).
+
+      // 2. Draw Large Heart Scratch Layer
+      const cx = w / 2;
+      const cy = h * 0.49;
+      const scale = 1.32;
+
+      function heartPath() {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy - 35 * scale);
+        ctx.bezierCurveTo(cx, cy - 88 * scale, cx - 105 * scale, cy - 88 * scale, cx - 105 * scale, cy - 25 * scale);
+        ctx.bezierCurveTo(cx - 105 * scale, cy + 30 * scale, cx - 45 * scale, cy + 70 * scale, cx, cy + 115 * scale);
+        ctx.bezierCurveTo(cx + 45 * scale, cy + 70 * scale, cx + 105 * scale, cy + 30 * scale, cx + 105 * scale, cy - 25 * scale);
+        ctx.bezierCurveTo(cx + 105 * scale, cy - 88 * scale, cx, cy - 88 * scale, cx, cy - 35 * scale);
+        ctx.closePath();
+      }
+
+      // Fill heart with rich opaque rose-gold glitter
+      ctx.save();
+      heartPath();
+      ctx.clip();
+
+      const hGrad = ctx.createRadialGradient(cx * 0.95, cy * 0.85, 15, cx, cy, 145);
+      hGrad.addColorStop(0, '#f6c9d4');
+      hGrad.addColorStop(0.3, '#df98a9');
+      hGrad.addColorStop(0.7, '#ba687b');
+      hGrad.addColorStop(1, '#7e2a3c');
+      ctx.fillStyle = hGrad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Stippled glitter sparkles (completely opaque)
+      for (let i = 0; i < 5000; i++) {
+        const x = Math.random() * w;
+        const y = Math.random() * h;
+        const r = Math.random() * 1.5 + 0.3;
+        const col = i % 4;
+        if (col === 0) ctx.fillStyle = '#ffffff';
+        else if (col === 1) ctx.fillStyle = '#fce5eb';
+        else if (col === 2) ctx.fillStyle = '#dfa878';
+        else ctx.fillStyle = '#641d2d';
+
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.restore();
+
+      // Golden heart outline
+      ctx.save();
+      heartPath();
+      ctx.strokeStyle = '#e0a980';
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      // Scratch Prompt Text over heart
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowColor = 'rgba(100, 29, 45, 0.7)';
+      ctx.shadowBlur = 4;
+      ctx.font = '600 12px Montserrat, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('TOUCH TO SCRATCH', cx, cy - 4);
+      ctx.font = '16px serif';
+      ctx.fillText('✨', cx, cy + 20);
+      ctx.restore();
+    }
+
+    renderScratchSurface();
+
+    function scratch(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const x = (clientX - rect.left) * (canvas.width / rect.width);
+      const y = (clientY - rect.top) * (canvas.height / rect.height);
+
+      ctx.save();
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(x, y, 28, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+
+      checkProgress();
+    }
+
+    function checkProgress() {
+      if (hasCelebrated) return;
+      const sx = canvas.width * 0.25;
+      const sy = canvas.height * 0.28;
+      const sw = canvas.width * 0.5;
+      const sh = canvas.height * 0.45;
+
+      const imgData = ctx.getImageData(sx, sy, sw, sh);
+      let clearCount = 0;
+      for (let i = 0; i < imgData.data.length; i += 4) {
+        if (imgData.data[i + 3] < 40) clearCount++;
+      }
+
+      if (clearCount / (imgData.data.length / 4) > 0.40) {
+        hasCelebrated = true;
+        const box = document.getElementById('scratchCardBox');
+        if (box) box.style.animation = 'none';
+        const revealed = document.querySelector('.revealed-content');
+        if (revealed) revealed.classList.add('is-visible');
+        const heading = document.getElementById('scratchHeading');
+        if (heading) heading.textContent = 'Our forever begins';
+        canvas.style.transition = 'opacity 0.6s ease-out';
+        canvas.style.opacity = '0';
+        setTimeout(() => {
+          canvas.style.pointerEvents = 'none';
+          hint.innerHTML = '🎉 Date Revealed: November 21, 2026 🎉';
+        }, 600);
+
+        if (typeof confetti === 'function') {
+          confetti({
+            particleCount: 80,
+            spread: 70,
+            origin: { y: 0.38 },
+            colors: ['#8c253e', '#e895a9', '#dfa878', '#ffffff']
+          });
+        }
+      }
+    }
+
+    canvas.addEventListener('mousedown', () => isDrawing = true);
+    window.addEventListener('mouseup', () => isDrawing = false);
+    window.addEventListener('mousemove', scratch);
+
+    canvas.addEventListener('touchstart', (e) => {
+      isDrawing = true;
+      scratch(e);
+    }, { passive: false });
+    window.addEventListener('touchend', () => isDrawing = false);
+    canvas.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      scratch(e);
+    }, { passive: false });
+
+    // ================= 2. LIVE COUNTDOWN =================
+    // Counts to the start time, or to the start of the day until EVENT_TIME is set.
+    const weddingDate = new Date(EVENT_DATE + 'T' + (EVENT_TIME || '00:00') + ':00+05:30').getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = weddingDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('daysCount').innerText = '00';
+        document.getElementById('hoursCount').innerText = '00';
+        document.getElementById('minutesCount').innerText = '00';
+        document.getElementById('secondsCount').innerText = '00';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('daysCount').innerText = String(days).padStart(2, '0');
+      document.getElementById('hoursCount').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutesCount').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('secondsCount').innerText = String(seconds).padStart(2, '0');
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // ================= 3. SAVE THE DATE CALENDAR (.ICS) =================
+    function icsUtc(date) {
+      return date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+    }
+
+    // Calendar lines longer than 75 characters must be folded onto continuation lines that start with a space.
+    function icsFold(line) {
+      const parts = [];
+      while (line.length > 75) {
+        parts.push(line.slice(0, 75));
+        line = ' ' + line.slice(75);
+      }
+      parts.push(line);
+      return parts.join('\r\n');
+    }
+
+    function buildIcs() {
+      let when;
+      if (EVENT_TIME) {
+        const start = new Date(EVENT_DATE + 'T' + EVENT_TIME + ':00+05:30');
+        const end = new Date(start.getTime() + EVENT_DURATION_HOURS * 60 * 60 * 1000);
+        when = ['DTSTART:' + icsUtc(start), 'DTEND:' + icsUtc(end)];
+      } else {
+        // No time yet, so add it as an all-day entry.
+        const nextDay = new Date(EVENT_DATE + 'T00:00:00Z');
+        nextDay.setUTCDate(nextDay.getUTCDate() + 1);
+        when = ['DTSTART;VALUE=DATE:' + EVENT_DATE.replace(/-/g, ''), 'DTEND;VALUE=DATE:' + icsUtc(nextDay).slice(0, 8)];
+      }
+      return [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Abu Zaid & Namira//Walima Invitation//EN',
+        'BEGIN:VEVENT',
+        'UID:walima-abuzaid-namira-20261121@invitation',
+        'DTSTAMP:' + icsUtc(new Date()),
+        ...when,
+        'SUMMARY:Walima of Dr. Abu Zaid & Dr. Namira',
+        'DESCRIPTION:Mr. & Mrs. Riyaz Khan invite you to the Walima of Dr. Abu Zaid Khan & Dr. Namira Kulsum.',
+        'LOCATION:JK Turf Wedding Hall\\, Y-Junction\\, Kausa\\, Mumbra\\, Thane\\, Maharashtra 400612',
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].map(icsFold).join('\r\n');
+    }
+
+    document.getElementById('saveDateBtn').addEventListener('click', () => {
+      const blob = new Blob([buildIcs()], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', 'AbuZaid_Namira_Walima.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    // ================= 4. AUDIO TOGGLE (Wedding Song) =================
+    const audioBtn = document.getElementById('audioToggle');
+    const toast = document.getElementById('audioToast');
+    const bgMusic = document.getElementById('bgMusic');
+    const AUDIO_START_SECONDS = 11;
+    let isPlaying = false;
+    let hasStartedMusic = false;
+
+    // Whenever the track reaches the end, loop back to the 11s mark instead of the very start.
+    bgMusic.addEventListener('ended', () => {
+      bgMusic.currentTime = AUDIO_START_SECONDS;
+      if (isPlaying) bgMusic.play().catch(() => {});
+    });
+
+    const musicIcon = document.getElementById('musicIcon');
+    const ICON_UNMUTED = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>';
+    const ICON_MUTED = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>';
+
+    function playMelody() {
+      if (isPlaying) return;
+      isPlaying = true;
+      audioBtn.setAttribute('aria-pressed', 'true');
+      toast.innerText = 'Romantic Melody Playing';
+      toast.style.opacity = '1';
+      setTimeout(() => toast.style.opacity = '0', 2000);
+      audioBtn.classList.remove('bg-[#b0435e]');
+      audioBtn.classList.add('bg-[#8c253e]');
+      if (musicIcon) musicIcon.innerHTML = ICON_UNMUTED;
+
+      if (!hasStartedMusic) {
+        hasStartedMusic = true;
+        bgMusic.currentTime = AUDIO_START_SECONDS;
+      }
+      bgMusic.play().catch(() => {});
+    }
+
+    function pauseMelody() {
+      if (!isPlaying) return;
+      isPlaying = false;
+      audioBtn.setAttribute('aria-pressed', 'false');
+      toast.innerText = 'Audio Paused';
+      toast.style.opacity = '1';
+      setTimeout(() => toast.style.opacity = '0', 1600);
+      audioBtn.classList.remove('bg-[#8c253e]');
+      audioBtn.classList.add('bg-[#b0435e]');
+      if (musicIcon) musicIcon.innerHTML = ICON_MUTED;
+      bgMusic.pause();
+    }
+
+    audioBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        pauseMelody();
+      } else {
+        playMelody();
+      }
+    });
+  </script>
+</body></html>
