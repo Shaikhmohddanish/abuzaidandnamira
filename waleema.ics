@@ -1,0 +1,33 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Abu Zaid and Namira//Walima invite//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:walima-abuzaid-namira-20261121@invite
+DTSTAMP:20261024T000000Z
+DTSTART:20261121T140000Z
+DTEND:20261121T173000Z
+SUMMARY:Dawat-e-Walima of Abu Zaid & Namira
+LOCATION:JK Turf Wedding Hall\, Y-Junction\, Kausa\, Mumbra\, Thane 400612
+DESCRIPTION:Mr. & Mrs. Riyaz Ahmad Khan invite you to the Dawat-e-Walima of
+  their grandson Dr. Abu Zaid Khan with Dr. Namira Kulsum\, from 7:30 PM on
+ wards.\n\nDirections: https://www.google.com/maps/dir/?api=1&destination=J
+ K%20Turf%20Wedding%20Hall%2C%20Y-Junction%2C%20Kausa%2C%20Mumbra%2C%20Than
+ e%20400612
+URL:https://www.google.com/maps/dir/?api=1&destination=JK%20Turf%20Wedding%
+ 20Hall%2C%20Y-Junction%2C%20Kausa%2C%20Mumbra%2C%20Thane%20400612
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Tomorrow at 7:30 PM: Dawat-e-Walima of Abu Zaid & Namira\, JK T
+ urf Wedding Hall\, Mumbra
+TRIGGER:-P1D
+END:VALARM
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Today at 7:30 PM: Dawat-e-Walima of Abu Zaid & Namira\, JK Turf
+  Wedding Hall\, Mumbra
+TRIGGER:-PT2H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
